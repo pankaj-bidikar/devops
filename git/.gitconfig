@@ -1,0 +1,77 @@
+[user]
+    name = Pankaj Bidikar
+    email = pankaj.bidikar07@gmail.com
+
+[core]
+    editor = code --wait          # Uses Visual Studio Code as the default editor
+    autocrlf = input              # Converts CRLF to LF on commit (macOS uses LF by default)
+    ignorecase = true             # Ignores case differences in file names (useful for macOS)
+    fileMode = true               # Ensures file permissions are tracked
+
+[alias]
+    # Basic Commands
+    st = status                 # git status
+    co = checkout               # git checkout
+    br = branch                 # git branch
+    ci = commit                 # git commit
+    df = diff                   # git diff
+	lg = log --oneline --graph --decorate --all
+
+    # Add & Commit
+    aa = add .                  # git add all changes
+    cm = commit -m              # git commit with a message
+    ca = commit --amend         # amend last commit
+    cam = commit -am            # add and commit in one step
+
+    # Fetch & Pull
+    pl = pull                   # git pull
+    pf = push --force           # force push
+    plr = pull --rebase         # pull with rebase
+
+    # Working with Branches
+    cb = checkout -b            # create and checkout a new branch
+    bclean = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d"
+                                # delete local branches that are already merged (excluding main/master)
+    rb = rebase                 # git rebase
+    rba = rebase --abort        # abort a rebase
+    rbc = rebase --continue     # continue a rebase
+
+    # Logs & History
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+                                # formatted log history
+    last = log -1 HEAD          # show last commit
+    unpushed = log --branches --not --remotes
+                                # show unpushed commits
+
+    # Undo & Reset
+    undo = reset --soft HEAD~1  # undo last commit but keep changes staged
+    unstage = reset HEAD --     # unstage a file
+    discard = checkout --       # discard changes in a file
+    hard = reset --hard         # hard reset to last commit
+
+    # Stash
+    ss = stash save             # stash changes
+    sl = stash list             # list stashed changes
+    sa = stash apply            # apply latest stash
+    sp = stash pop              # apply and remove latest stash
+
+    # Remote Operations
+    r = remote -v               # list remotes
+    ru = remote update          # update remote tracking branches
+    rprune = remote prune origin
+	lol = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+                                # remove deleted branches from origin
+
+[color]
+    ui = auto                     # Enables color output in terminal
+    [color "status"]
+        added = green             # Newly added files appear in green
+        changed = yellow          # Modified files appear in yellow
+        untracked = red           # Untracked files appear in red
+    [color "branch"]
+        current = yellow reverse  # Highlights the current branch
+        local = yellow
+        remote = green
+[push]
+    default = simple              # Pushes the current branch to its upstream branch
+    autoSetupRemote = true        # Automatically sets the remote when creating new branches
